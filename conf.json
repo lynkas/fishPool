@@ -1,0 +1,10 @@
+{
+  "db": {
+    "db_address":"127.0.0.1",
+    "port":"5432",
+    "db_name":"fishpool",
+    "username":"fishpool",
+    "password":"fishpool",
+    "ssl_mode": false
+  }
+}
