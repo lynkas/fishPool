@@ -5,31 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/drawingboard.css">
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/pressure.min.js"></script>
-    <script src="./js/drawingboard.js"></script>
+    <link rel="stylesheet" href="css/drawingboard.css">
+    <link rel="stylesheet" href="css/index.css">
+
 </head>
 <body>
-    <div style="width: 500px;height:500px" id="title-board"></div>
-    <!-- <div style="width: 500px;height:500px" id="test"></div> -->
-    <div id="number"></div>
+    <div class="nav">
+        <img class="head-img" src="src/logo.jpg">
+    </div>
+
+    <div class="cvs-out">
+        <div class="cvs" id="title-board"></div>
+        <!-- <div style="width: 500px;height:500px" id="test"></div> -->
+        <div id="number"></div>
+
+    </div>
+
+<div>
+
+</div>
 </body>
-<script>
-var imageBoard = new DrawingBoard.Board('title-board');
-
-Pressure.set('#title-board canvas', {
-  change: function(force, event){
-      if(event.pointerType==="mouse"){
-        imageBoard.controls[2].val=imageBoard.controls[2].realValue;
-        imageBoard.controls[2].updateView();
-        return
-      }
-    imageBoard.controls[2].val=force*imageBoard.controls[2].realValue;
-    imageBoard.controls[2].updateView();
-    $("#number").text(force)
-
-  }
-});
-</script>
+<script src="js/jquery.min.js"></script>
+<script src="js/pressure.min.js"></script>
+<script src="js/drawingboard.js"></script>
+<script src="js/index.js"></script>
 </html>

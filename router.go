@@ -6,14 +6,15 @@ func router(r *gin.Engine)  {
 	api:=r.Group("/api")
 
 	pic:=api.Group("/pic")
-	pic.GET("/")
+	//pic.GET("/time/:start",GetPicsTime)
+	pic.GET("/",GetPicsRandom)
 	pic.GET("/:key",GetPic)
-	pic.POST("/")
-	pic.DELETE("/")
+	pic.POST("/",AddPic)
+	pic.DELETE("/:key",DelPic)
 
-	tag:=api.Group("/tag")
-	tag.GET("/")
+	//tag:=api.Group("/tag")
+	//tag.GET("/")
 
-	_=api.Group("/auth")
+	//_=api.Group("/auth")
 
 }

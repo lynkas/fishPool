@@ -26,26 +26,24 @@ type dbConfig struct{
 //}
 
 type Pic struct {
-	gorm.Model
+	gorm.Model `json:"-"`
 	FileName string `json:"file_name"`
 	Token string `json:"-"`
 	Key string `gorm:"unique_index" json:"key"`
 	CreatedTime time.Time `json:"created_time"`
 	Creator string `json:"creator"`
 	Topic string `json:"topic"`
+	Own bool `gorm:"-" json:"own"`
 }
 
-
+type Pics struct {
+	Pic []Pic `json:"pic"`
+}
 
 var config struct{
 	DB dbConfig `json:"db"`
 }
 
-func Init(){
-	readConfig()
-	dBinit()
-	dbChange()
-}
 
 func dbChange()  {
 	global.DB.AutoMigrate(&Pic{})
