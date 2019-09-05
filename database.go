@@ -20,12 +20,19 @@ type dbConfig struct{
 }
 
 type User struct {
-	Id int
+	Id int `gorm:"primary_key"`
 	Token string
 	LastUsed  time.Time
 }
 
-
+type Pic struct {
+	Id int `gorm:"primary_key"`
+	FileName string
+	By *User
+	CreationTime time.Time
+	Creator string
+	Topic string
+}
 
 var config struct{
 	DB dbConfig `json:"db"`
@@ -34,10 +41,11 @@ var config struct{
 func Init(){
 	readConfig()
 	dBinit()
+	dbChange()
 }
 
 func dbChange()  {
-	global.DB.AutoMigrate(&User{},)
+	global.DB.AutoMigrate(&User{},&Pic{})
 
 }
 
@@ -77,5 +85,4 @@ func dBinit(){
 		panic(unmess(err.Error()))
 	}
 	global.DB=db
-
 }
