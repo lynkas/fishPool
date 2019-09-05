@@ -7,6 +7,7 @@ func router(r *gin.Engine)  {
 
 	pic:=api.Group("/pic")
 	pic.GET("/")
+	pic.GET("/:key",GetPic)
 	pic.POST("/")
 	pic.DELETE("/")
 

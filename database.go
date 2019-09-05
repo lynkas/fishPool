@@ -19,20 +19,23 @@ type dbConfig struct{
 	SSLMode bool `json:"ssl_mode"`
 }
 
-type User struct {
-	Id int `gorm:"primary_key"`
-	Token string
-	LastUsed  time.Time
-}
+//type User struct {
+//	gorm.Model
+//	Token string
+//	LastUsed  time.Time
+//}
 
 type Pic struct {
-	Id int `gorm:"primary_key"`
-	FileName string
-	By *User
-	CreationTime time.Time
-	Creator string
-	Topic string
+	gorm.Model
+	FileName string `json:"file_name"`
+	Token string `json:"-"`
+	Key string `gorm:"unique_index" json:"key"`
+	CreatedTime time.Time `json:"created_time"`
+	Creator string `json:"creator"`
+	Topic string `json:"topic"`
 }
+
+
 
 var config struct{
 	DB dbConfig `json:"db"`
@@ -45,7 +48,7 @@ func Init(){
 }
 
 func dbChange()  {
-	global.DB.AutoMigrate(&User{},&Pic{})
+	global.DB.AutoMigrate(&Pic{})
 
 }
 
