@@ -11,6 +11,7 @@ var global struct{
 
 func main() {
 	Init()
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 	router(r)
 
