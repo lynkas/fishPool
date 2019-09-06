@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/axgle/mahonia"
-	"github.com/gin-contrib/location"
 	"github.com/gin-gonic/gin"
 	"math/rand"
+	"net/http"
 	"os"
 	"time"
 )
@@ -43,11 +43,13 @@ func RandStringBytesMask(length int) string {
 }
 
 func getCookies(c *gin.Context) string {
-	url := location.Get(c)
+	//url := location.Get(c)
 	cookie, err := c.Cookie("fishpool")
 	if err != nil {
 		nc:=RandStringBytesMask(32)
-		c.SetCookie("fishpool",nc, 2147483647, "/", url.Host, false, true)
+		http.SetCookie(c.Writer,&http.Cookie{
+			Name:"fishpool",Value:nc,Expires: time.Now().Add(2147483647 * time.Second),
+		})
 		cookie=nc
 	}
 	return cookie
