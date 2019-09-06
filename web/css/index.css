@@ -1,4 +1,4 @@
-.nav{
+.nav-logo{
     width: 100%;
     max-height: 150px;
     text-align: center;
@@ -7,12 +7,12 @@
 
 .head-img{
     max-height: 150px;
-    height: 100%;
+    max-width: 100%;
 }
 
 .cvs{
-    width: 1280px;
-    max-width: 100%;
+    /*width: 1280px;*/
+    width: 100%;
     height: 720px;
     margin: auto;
     margin-top: 20px;
@@ -20,4 +20,57 @@
 
 .cvs-out{
     width: 100%;
+}
+
+.draw-title{
+    display: inline;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.input{
+    border: 0;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px black dashed;
+    margin-bottom: 5px;
+}
+
+.input:focus{
+    outline-width: 0;
+}
+
+
+.btn-unfocus:focus{
+    outline: 0; !important;
+}
+.menu{
+    padding-top: 10px;
+}
+
+.masterpiece-div{
+    width: 350px;
+    height: 200px;
+    margin:5px
+}
+
+.masterpiece-img{
+    width: 100%;
+    height: 100%;
+    max-height: 120px;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+.masterpiece-info{
+
+}
+
+.use-topic{
+    background: #0f6674;
+    color: white;
+    border-radius: 5px;
+    padding-left: 5px;
 }

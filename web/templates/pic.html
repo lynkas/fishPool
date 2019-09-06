@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{.Topic}}</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+
+</head>
+<body>
+<div class="nav-logo">
+    <img class="head-img" src="/src/logo.png">
+</div>
+
+<div style="width: 100%;text-align: center">
+    <img src="{{.FileName}}">
+    <div>
+        <span style="font-size: 20px">Author</span>
+        <span style="font-size: 20px;font-weight: bold">{{.Creator}}</span>
+    </div>
+    <div>
+        <span style="font-size: 20px">Time</span>
+        <span style="font-size: 20px;font-weight: bold">{{.CreatedTime}}</span>
+    </div>
+    <div>
+        <span style="font-size: 20px">Topic</span>
+        <span style="font-size: 20px;font-weight: bold">{{.Topic}}</span>
+    </div>
+    {{if .Own}}
+    <div>
+        <button class="btn btn-outline-danger btn-sm" id="delete">Delete</button>
+    </div>
+    {{end}}
+</div>
+
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script>
+
+    $("#delete").click(function () {
+        $.ajax({
+            url: window.origin+"/api"+window.location.pathname,
+            type: 'DELETE',
+            success: function(data) {
+                window.location="/"
+            }
+        });
+    });
+</script>
+</html>
