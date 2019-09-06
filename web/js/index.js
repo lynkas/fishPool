@@ -4,14 +4,14 @@ $(()=>{
 
     Pressure.set('#title-board canvas', {
         change: function(force, event){
-            if(event.pointerType==="mouse"){
+            if(event.pointerType!=="pen"){
                 imageBoard.controls[2].val=imageBoard.controls[2].realValue;
                 imageBoard.controls[2].updateView();
                 return
             }
             imageBoard.controls[2].val=force*imageBoard.controls[2].realValue;
             imageBoard.controls[2].updateView();
-            $("#number").text(force)
+            // $("#number").text(force)
 
         }
     });
