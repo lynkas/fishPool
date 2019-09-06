@@ -25,6 +25,12 @@ type dbConfig struct{
 //	LastUsed  time.Time
 //}
 
+type Topic struct {
+	gorm.Model `json:"-"`
+	Content string `json:"content" gorm:"unique_index"`
+	Count int `json:"count" gorm:"default:0"`
+}
+
 type Pic struct {
 	gorm.Model `json:"-"`
 	FileName string `json:"file_name"`
@@ -46,7 +52,7 @@ var config struct{
 
 
 func dbChange()  {
-	global.DB.AutoMigrate(&Pic{})
+	global.DB.AutoMigrate(&Pic{},&Topic{})
 
 }
 
@@ -80,7 +86,6 @@ func dBinit(){
 		config.DB.DBName,
 		config.DB.Password,
 		))
-	fmt.Print(config.DB.Password)
 	if err != nil {
 		fmt.Println("Failed to connect database")
 		panic(unmess(err.Error()))

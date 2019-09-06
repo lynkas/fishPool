@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/axgle/mahonia"
+	"github.com/gin-contrib/location"
 	"github.com/gin-gonic/gin"
 	"math/rand"
 	"os"
@@ -42,10 +43,11 @@ func RandStringBytesMask(length int) string {
 }
 
 func getCookies(c *gin.Context) string {
+	url := location.Get(c)
 	cookie, err := c.Cookie("fishpool")
 	if err != nil {
 		nc:=RandStringBytesMask(32)
-		c.SetCookie("fishpool",nc, 0, "/", "localhost", false, true)
+		c.SetCookie("fishpool",nc, 2147483647, "/", url.Host, false, true)
 		cookie=nc
 	}
 	return cookie
@@ -67,4 +69,9 @@ func picPath(){
 			fmt.Println(err)
 		}
 	}
+}
+
+func TimeReadable(t time.Time) string {
+
+	return t.Format("2006.01.02 1504")
 }

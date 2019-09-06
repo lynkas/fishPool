@@ -1,8 +1,27 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-contrib/location"
+	"github.com/gin-gonic/gin"
+	"html/template"
+)
 
 func router(r *gin.Engine)  {
+
+	r.SetFuncMap(template.FuncMap{
+		"TimeReadable": TimeReadable,
+	})
+	r.Use(location.Default())
+	r.Static("/js", "./web/js")
+	r.Static("/css", "./web/css")
+	r.Static("/media", "./web/media")
+	r.Static("/src", "./web/src")
+	r.LoadHTMLGlob("web/templates/*")
+
+	r.GET("/",TMainPage)
+	r.GET("/pic/:key",TPic)
+
+
 	api:=r.Group("/api")
 
 	pic:=api.Group("/pic")
@@ -12,8 +31,9 @@ func router(r *gin.Engine)  {
 	pic.POST("/",AddPic)
 	pic.DELETE("/:key",DelPic)
 
-	//tag:=api.Group("/tag")
-	//tag.GET("/")
+	tag:=api.Group("/tag")
+	tag.GET("/")
+	tag.GET("/random",GetRandomTopic)
 
 	//_=api.Group("/auth")
 
