@@ -1,0 +1,48 @@
+{{define "cnt/my.html"}}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        {{template "css"}}
+        <link rel="stylesheet" href="/css/my.css">
+
+    </head>
+    <body>
+    {{template "logo"}}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center" style="margin-bottom: 10px">
+                    <span class="draw-title">Token</span>
+                    <input id="token" class="input" style="width: 400px" value="{{.cookie}}">
+                    <button id="apply-token" class="btn btn-outline-danger">Apply Token</button>
+
+                </div>
+
+            </div>
+            <div class="col-12">
+                <ul class="list-group list-group-flush">
+                    {{range .pics.Pic}}
+                        <li class="list-group-item text-center">
+                            <span style="margin-right: 5px">{{.CreatedTime | TimeReadable}}</span>
+                            <span style="margin-right: 5px" class="use-topic d-inline-block">{{.Topic}}</span>
+                            <a href="/pic/{{.Key}}">View</a>
+                        </li>
+
+                    {{end}}
+
+
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+    </body>
+    {{template "js"}}
+    <script src="/js/my.js"></script>
+    </html>
+{{end}}

@@ -46,7 +46,7 @@ func getCookies(c *gin.Context) string {
 	//url := location.Get(c)
 	cookie, err := c.Cookie("fishpool")
 	if err != nil {
-		nc:=RandStringBytesMask(32)
+		nc:=RandStringBytesMask(256)
 		http.SetCookie(c.Writer,&http.Cookie{
 			Name:"fishpool",Value:nc,Expires: time.Now().Add(2147483647 * time.Second),
 		})

@@ -16,10 +16,12 @@ func router(r *gin.Engine)  {
 	r.Static("/css", "./web/css")
 	r.Static("/media", "./web/media")
 	r.Static("/src", "./web/src")
-	r.LoadHTMLGlob("web/templates/*")
+
+	r.LoadHTMLGlob("web/templates/**/*")
 
 	r.GET("/",TMainPage)
 	r.GET("/pic/:key",TPic)
+	r.GET("/my",TMy)
 
 
 	api:=r.Group("/api")

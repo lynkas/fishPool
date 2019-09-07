@@ -1,3 +1,4 @@
+{{define "cnt/index.html"}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{.title}}</title>
 
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/bootstrap-grid.min.css">
+    {{template "css"}}
     <link rel="stylesheet" href="/css/drawingboard.css">
     <link rel="stylesheet" href="/css/index.css">
 
@@ -19,48 +19,62 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 menu">
-            <div class="draw-title">draw</div>
-            <input class="input" id="topic" name="topic" value="{{.topic.Content}}" />
-            <button id="change-topic" class="btn btn-outline-info btn-sm btn-unfocus" type="button">random topic</button>
-            <div class="draw-title">name</div>
-            <input class="input" id="author" name="author" value="Someone" />
+            <div class="d-inline-block">
+                <div class="draw-title">draw</div>
+                <input class="input" id="topic" name="topic" value="{{.topic.Content}}" />
+                <button id="change-topic" class="btn btn-outline-info btn-sm btn-unfocus" type="button">random topic</button>
+            </div>
+            <div class="d-inline-block">
+                <div class="draw-title">name</div>
+                <input class="input" id="author" name="author" value="Someone" />
+                <button id="submit" class="btn btn-sm btn-success">submit</button>
+            </div>
 
-            <button id="submit" class="btn btn-sm btn-success">Submit</button>
+            <div class="d-inline-block">
+                <a href="/my">
+                    <button class="btn btn-sm btn-outline-info">my art sheet</button>
+                </a>
+            </div>
+
             <a style="margin-left: 5px" id="link">
 
             </a>
         </div>
         <div class="col-12">
+            <div id="number"></div>
+
             <div class="cvs-out">
                 <div class="cvs" id="title-board"></div>
                 <!-- <div style="width: 500px;height:500px" id="test"></div> -->
-                <div id="number"></div>
             </div>
         </div>
         <div class="col-12">
             <h2 style="display:inline-block;margin-top: 20px">Masterpieces...</h2>
             <button id="rand-mp" style="margin-left: 5px" class="btn btn-sm btn-outline-info">Random</button>
             <div style="display: none" id="mp-s">
+
                 <div class="masterpiece-div">
-                    <div class="masterpiece-img" style=""></div>
+                    <div class="masterpiece-img" >
+                        <img class="mp-img-img" src="{{.FileName}}">
+                    </div>
                     <div class="masterpiece-info">
-{{/*                        {{.Creator}}*/}}
-{{/*                        {{.CreatedTime | TimeReadable}}*/}}
-                        <a class="linkto" href="/pic/{{.Key}}">View</a>
+                        <div class="creator" style="display: inline-block"></div>
+                        <div class="creationtime" style="display: inline-block"></div>
+                        <a class="linkto" href="">View</a>
 
                         <div class="use-topic">
-{{/*                            {{.Topic}}*/}}
                         </div>
                     </div>
                 </div>
-
             </div>
             <div id="mp-c" class="d-flex flex-row bd-highlight mb-3 flex-wrap d-flex justify-content-center">
 
                 {{range .pics.Pic}}
                     <div class="">
                         <div class="masterpiece-div">
-                            <div class="masterpiece-img" style="background-image: url('{{.FileName}}')"></div>
+                            <div class="masterpiece-img" >
+                                <img src="{{.FileName}}">
+                            </div>
                             <div class="masterpiece-info">
                                 {{.Creator}}
                                 {{.CreatedTime | TimeReadable}}
@@ -81,9 +95,10 @@
 
 </div>
 </body>
-<script src="/js/jquery.min.js"></script>
+{{template "js"}}
 <script src="/js/pressure.min.js"></script>
 <script src="/js/drawingboard.js"></script>
-<script src="/js/bootstrap.min.js"></script>
 <script src="/js/index.js"></script>
+
 </html>
+{{end}}

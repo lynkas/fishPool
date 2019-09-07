@@ -16,7 +16,7 @@ func TMainPage(c *gin.Context){
 	}
 	var pics Pics
 	global.DB.Order(gorm.Expr("random()")).Limit(15).Find(&(pics.Pic))
-	c.HTML(http.StatusOK,"index.html",gin.H{
+	c.HTML(http.StatusOK,"cnt/index.html",gin.H{
 		"topic":topic,
 		"pics":pics,
 		"title":"fishPool",
@@ -38,5 +38,17 @@ func TPic(c *gin.Context)  {
 	c.HTML(200,"pic.html",pic)
 	c.Abort()
 	return
+
+}
+
+func TMy(c *gin.Context)  {
+	cookie:=getCookies(c)
+	var pics Pics
+	global.DB.Order("id desc").Where("token = ?",cookie).Find(&(pics.Pic))
+
+	c.HTML(http.StatusOK,"cnt/my.html",gin.H{
+		"pics":pics,
+		"cookie":cookie,
+	})
 
 }

@@ -4,6 +4,7 @@ $(()=>{
 
     Pressure.set('#title-board canvas', {
         change: function(force, event){
+            console.log(event)
             if(event.pointerType!=="pen"){
                 imageBoard.controls[2].val=imageBoard.controls[2].realValue;
                 imageBoard.controls[2].updateView();
@@ -11,7 +12,7 @@ $(()=>{
             }
             imageBoard.controls[2].val=force*imageBoard.controls[2].realValue;
             imageBoard.controls[2].updateView();
-            // $("#number").text(force)
+            $("#number").text(force)
 
         }
     });
@@ -82,10 +83,12 @@ function mkmp(data) {
     var min=new Date(data.created_time).getMinutes()
     min=min<10?"0"+min:min;
 
-    $(n.find(".masterpiece-info")).prepend(data.creator+" "+y+"."+m+"."+d+" "+h+""+min)
+    $(n.find(".creator")).text(data.creator)
+
+    $(n.find(".creationtime")).text(y+"."+m+"."+d+" "+h+""+min)
     $(n.find(".linkto")).attr("href","/pic/"+data.key).text("View")
 
-    $(n.find(".masterpiece-img")).css("background-image","url('"+data.file_name+"')")
+    $(n.find(".mp-img-img")).attr("src",data.file_name);
     n.show()
     return n
 }
@@ -99,7 +102,8 @@ $("#submit").click(function () {
             "topic":$("#topic").val()
         },
         success:function (data) {
-            $("#link").attr("href","/pic/"+data.key).text(window.origin+"/pic/"+data.key)
+            $.toast("Done")
+            window.location="/pic/"+data.key
         },
         error:function (res,data) {
             console.log("data")
