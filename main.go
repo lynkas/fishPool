@@ -7,10 +7,12 @@ import (
 
 var global struct{
 	DB *gorm.DB
+	Rec map[string]int64
 }
 
 func main() {
 	Init()
+	go Checker()
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 	router(r)

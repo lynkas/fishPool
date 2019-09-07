@@ -56,6 +56,7 @@ func getCookies(c *gin.Context) string {
 }
 
 func Init(){
+	global.Rec=make(map[string]int64)
 	readConfig()
 	dBinit()
 	dbChange()

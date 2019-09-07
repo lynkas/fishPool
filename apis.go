@@ -35,7 +35,11 @@ func AddPic(c *gin.Context){
 		c.Abort()
 		return
 	}
-
+	if PostedRecently(&pic){
+		c.JSON(401,gin.H{"message":"has sent"})
+		c.Abort()
+		return
+	}
 	id, _ := uuid.NewUUID()
 	unbased, err := base64.StdEncoding.DecodeString(pic)
 	if err != nil {
