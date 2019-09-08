@@ -48,12 +48,17 @@ type Pics struct {
 
 var config struct{
 	DB dbConfig `json:"db"`
+	V int `json:"v"`
 }
 
 
 func dbChange()  {
 	global.DB.AutoMigrate(&Pic{},&Topic{})
 
+}
+
+func dbStat()  {
+	global.DB.Table("pics").Count(&global.Total)
 }
 
 func readConfig()  {
@@ -70,6 +75,8 @@ func readConfig()  {
 	if err != nil {
 		panic(err)
 	}
+	global.V=config.V
+	
 }
 
 func dBinit(){

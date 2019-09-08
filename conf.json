@@ -6,5 +6,6 @@
     "username":"fishpool",
     "password":"fishpool",
     "ssl_mode": false
-  }
+  },
+  "v":1
 }

@@ -28,8 +28,9 @@ func router(r *gin.Engine)  {
 
 	pic:=api.Group("/pic")
 	//pic.GET("/time/:start",GetPicsTime)
-	pic.GET("/",GetPicsRandom)
-	pic.GET("/:key",GetPic)
+	pic.GET("/random",GetPicsRandom)
+	pic.GET("/recent",GetPicsRecent)
+	pic.GET("/one",GetPic)
 	pic.POST("/",AddPic)
 	pic.DELETE("/:key",DelPic)
 

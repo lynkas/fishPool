@@ -8,6 +8,8 @@ import (
 var global struct{
 	DB *gorm.DB
 	Rec map[string]int64
+	Total int
+	V int
 }
 
 func main() {

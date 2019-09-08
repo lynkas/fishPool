@@ -2,20 +2,20 @@ var imageBoard
 $(()=>{
     imageBoard = new DrawingBoard.Board('title-board');
 
-    Pressure.set('#title-board canvas', {
-        change: function(force, event){
-            console.log(event)
-            if(event.pointerType!=="pen"){
-                imageBoard.controls[2].val=imageBoard.controls[2].realValue;
-                imageBoard.controls[2].updateView();
-                return
-            }
-            imageBoard.controls[2].val=force*imageBoard.controls[2].realValue;
-            imageBoard.controls[2].updateView();
-            $("#number").text(force)
-
-        }
-    });
+    // Pressure.set('#title-board canvas', {
+    //     change: function(force, event){
+    //         console.log(event)
+    //         if(event.pointerType!=="pen"){
+    //             imageBoard.controls[2].val=imageBoard.controls[2].realValue;
+    //             imageBoard.controls[2].updateView();
+    //             return
+    //         }
+    //         imageBoard.controls[2].val=force*imageBoard.controls[2].realValue;
+    //         imageBoard.controls[2].updateView();
+    //         $("#number").text(force)
+    //
+    //     }
+    // });
 
 $(".use-topic").click(function (e) {
     $("#topic").val(e.target.innerText);
@@ -34,7 +34,7 @@ $("#change-topic").click(function (e) {
         },
         success:function (data) {
 
-            $("#topic").val(data["content"])
+            $("#topic").val(data["content"]);
             $(a.target).removeClass("disabled")
         },
         error:function (response,data) {
@@ -48,7 +48,30 @@ $("#rand-mp").click(function (e) {
 
     $.get({
         async:true,
-        url:"/api/pic/",
+        url:"/api/pic/random/",
+        then:function(a){
+            // $(a.target).attr("disabled","")
+        },
+        success:function (data) {
+            data=data["pic"];
+            $("#mp-c").html("")
+            for (i=0;i<data.length;i++){
+                $("#mp-c").append(mkmp(data[i]))
+            }
+
+            // $(a.target).removeAttr("disabled")
+        },
+        error:function (response,data) {
+            // $(a.target).removeAttr("disabled")
+        }
+    })
+});
+$("#rece-mp").click(function (e) {
+    var a=e;
+
+    $.get({
+        async:true,
+        url:"/api/pic/recent/",
         then:function(a){
             // $(a.target).attr("disabled","")
         },

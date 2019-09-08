@@ -61,6 +61,7 @@ func Init(){
 	dBinit()
 	dbChange()
 	picPath()
+	dbStat()
 }
 
 var PIC_PATH = "web/media/"

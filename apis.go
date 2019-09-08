@@ -13,7 +13,12 @@ import (
 )
 
 func GetPic(c *gin.Context)  {
-	key:=c.Param("key")
+	key := c.DefaultQuery("key", "")
+	if key=="" {
+		c.JSON(404, gin.H{"message": "no this pic"})
+		c.Abort()
+		return
+	}
 	pic:=Pic{}
 	global.DB.Where("key=?", key).First(&pic)
 
@@ -90,10 +95,18 @@ func AddPic(c *gin.Context){
 	global.DB.Create(&picObject)
 	c.JSON(200,picObject)
 	c.Abort()
+
+	global.Total+=1
 	return
 }
 
 func DelPic(c *gin.Context)  {
+	//key := c.DefaultQuery("key", "")
+	//if key=="" {
+	//	c.JSON(404, gin.H{"message": "no this pic"})
+	//	c.Abort()
+	//	return
+	//}
 	key:=c.Param("key")
 	pic:=Pic{}
 	global.DB.Where("key=?", key).First(&pic)
@@ -108,10 +121,12 @@ func DelPic(c *gin.Context)  {
 	if token==pic.Token {
 		global.DB.Delete(&pic)
 		c.JSON(200,gin.H{"message":"done"})
+		global.Total-=1
 	}else {
 		c.JSON(http.StatusForbidden,gin.H{"message":"might not belongs to you"})
 	}
 	c.Abort()
+
 	return
 }
 
@@ -121,6 +136,16 @@ func GetPicsRandom(c *gin.Context)  {
 	c.JSON(http.StatusOK,pics)
 	c.Abort()
 	return
+}
+
+func GetPicsRecent(c *gin.Context)  {
+
+	var pics Pics
+	global.DB.Order("id desc").Limit(20).Find(&(pics.Pic))
+	c.JSON(http.StatusOK,pics)
+	c.Abort()
+	return
+
 }
 
 func GetRandomTopic (c *gin.Context)  {

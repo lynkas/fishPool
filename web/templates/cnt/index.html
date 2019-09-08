@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{.title}}</title>
 
-    {{template "css"}}
-    <link rel="stylesheet" href="/css/drawingboard.css">
-    <link rel="stylesheet" href="/css/index.css">
+    {{template "css" .}}
+    <link rel="stylesheet" href="/css/drawingboard.css?{{.v}}">
+    <link rel="stylesheet" href="/css/index.css?{{.v}}">
 
 </head>
 <body>
@@ -49,8 +49,9 @@
             </div>
         </div>
         <div class="col-12">
-            <h2 style="display:inline-block;margin-top: 20px">Masterpieces...</h2>
-            <button id="rand-mp" style="margin-left: 5px" class="btn btn-sm btn-outline-info">Random</button>
+            <h2 style="display:inline-block;margin-top: 20px">masterpieces<span style="font-size: 20px!important;" class="badge badge-info">{{.total}}</span></h2>
+            <button id="rand-mp" style="margin-left: 5px" class="btn btn-sm btn-outline-info">random</button>
+            <button id="rece-mp" style="margin-left: 5px" class="btn btn-sm btn-outline-info">recent</button>
             <div style="display: none" id="mp-s">
 
                 <div class="masterpiece-div">
@@ -95,10 +96,10 @@
 
 </div>
 </body>
-{{template "js"}}
-<script src="/js/pressure.min.js"></script>
-<script src="/js/drawingboard.js"></script>
-<script src="/js/index.js"></script>
+{{template "js" .}}
+{{/*<script src="/js/pressure.min.js?{{.v}}"></script>*/}}
+<script src="/js/drawingboard.js?{{.v}}"></script>
+<script src="/js/index.js?{{.v}}"></script>
 
 </html>
 {{end}}

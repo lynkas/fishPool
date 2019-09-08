@@ -20,6 +20,8 @@ func TMainPage(c *gin.Context){
 		"topic":topic,
 		"pics":pics,
 		"title":"fishPool",
+		"total":global.Total,
+		"v":global.V,
 	})
 }
 
@@ -35,7 +37,10 @@ func TPic(c *gin.Context)  {
 		return
 	}
 	pic.Own=cookie==pic.Token
-	c.HTML(200,"pic.html",pic)
+	c.HTML(200,"cnt/pic.html",gin.H{
+		"pic":pic,
+		"v":global.V,
+	})
 	c.Abort()
 	return
 
@@ -49,6 +54,7 @@ func TMy(c *gin.Context)  {
 	c.HTML(http.StatusOK,"cnt/my.html",gin.H{
 		"pics":pics,
 		"cookie":cookie,
+		"v":global.V,
 	})
 
 }

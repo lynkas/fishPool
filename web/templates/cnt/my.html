@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        {{template "css"}}
-        <link rel="stylesheet" href="/css/my.css">
+        {{template "css" .}}
+        <link rel="stylesheet" href="/css/my.css?{{.v}}">
 
     </head>
     <body>
@@ -42,7 +42,7 @@
 
     </div>
     </body>
-    {{template "js"}}
-    <script src="/js/my.js"></script>
+    {{template "js" .}}
+    <script src="/js/my.js?{{.v}}"></script>
     </html>
 {{end}}

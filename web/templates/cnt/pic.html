@@ -1,3 +1,5 @@
+{{define "cnt/pic.html"}}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,29 +8,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{.Topic}}</title>
 
-    {{template "css"}}
+    {{template "css" .}}
+    <link rel="stylesheet" href="/css/pic.css?{{.v}}">
 
 </head>
 <body>
-<div class="nav-logo">
-    <a href="/"><img class="head-img" src="/src/logo.png"></a>
-</div>
+{{template "logo"}}
 
 <div style="width: 100%;text-align: center">
-    <img style="max-width: 100%" src="{{.FileName}}">
+    <img style="max-width: 100%" src="{{.pic.FileName}}">
     <div>
         <span style="font-size: 20px">Author</span>
-        <span style="font-size: 20px;font-weight: bold">{{.Creator}}</span>
+        <span style="font-size: 20px;font-weight: bold">{{.pic.Creator}}</span>
     </div>
     <div>
         <span style="font-size: 20px">Time</span>
-        <span style="font-size: 20px;font-weight: bold">{{.CreatedTime}}</span>
+        <span style="font-size: 20px;font-weight: bold">{{.pic.CreatedTime}}</span>
     </div>
     <div>
         <span style="font-size: 20px">Topic</span>
-        <span style="font-size: 20px;font-weight: bold">{{.Topic}}</span>
+        <span style="font-size: 20px;font-weight: bold">{{.pic.Topic}}</span>
     </div>
-    {{if .Own}}
+    {{if .pic.Own}}
     <div>
         <button class="btn btn-outline-danger btn-sm" id="delete">Delete</button>
     </div>
@@ -36,6 +37,7 @@
 </div>
 
 </body>
-{{template "js"}}
-<script src="/js/pic.js"></script>
+{{template "js" .}}
+<script src="/js/pic.js?{{.v}}"></script>
 </html>
+{{end}}
