@@ -17,7 +17,7 @@ func PostedRecently(pic *string) bool{
 func Checker()  {
 	for true{
 		for k,v:=range global.Rec{
-			if time.Now().Unix()-v>=120{
+			if time.Now().Unix()-v>=10{
 				delete(global.Rec, k)
 			}
 		}
